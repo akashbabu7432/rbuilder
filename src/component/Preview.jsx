@@ -1,5 +1,6 @@
-import { Divider } from '@mui/material'
+import { Divider,Button } from '@mui/material'
 import React from 'react'
+import { FaXmark } from "react-icons/fa6";
 
 
 function Preview() {
@@ -27,6 +28,21 @@ function Preview() {
         |<span className='m-2'>University</span>
         |<span className='m-2'>year of passout</span>
       </p>
+
+       <Divider sx={{fontSize:'25px'}}>Proffessional Experience</Divider>
+      <h4>Job / Internship</h4>
+      <p>
+        <span className='m-2'>Company name</span>
+        |<span className='m-2'>Company Location</span>
+        |<span className='m-2'>Duration</span>
+      </p>
+
+      <Divider sx={{fontSize:'25px ' ,marginBottom:'10px'}}>Skills</Divider>
+      <div className="d-flex flex-wrap justify-content-between p-3 ">
+        <Button variant="contained">node js<FaXmark className='mx-2 cursor-pointer'/></Button>
+      </div>
+      
+
 
 
     </div>
