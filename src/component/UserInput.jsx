@@ -16,6 +16,29 @@ function UserInput() {
  const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
+  const [rdetails,setrdetails]=React.useState({
+    username:"",
+    jobTitle:"",
+    location:"",
+    email:"",
+    mobile:"",
+    github:"",
+    linkedin:"",
+    portfolio:"",
+    course:"",
+    college:"",
+    university:"",
+    passoutYear:"",
+    jobType:"",
+    company :"",
+    cLoaction:"",
+    duration:"",
+    userSkills: [],
+    summary:"",
+
+  })
+  console.log(rdetails)
+
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -65,9 +88,9 @@ function UserInput() {
         <div>
             <h3>Personal Details</h3>
             <div className='d-flex row p-3'>
-                <TextField id="standard-basic-name" label="Name" variant="standard" />
-                <TextField id="standard-basic-Job" label="Job Title" variant="standard" />
-                <TextField id="standard-basic-name-location" label="Location" variant="standard" />
+                <TextField value={rdetails.username} onChange={e=>setrdetails({...rdetails,username:e.target.value})} id="standard-basic-name" label="Name" variant="standard" />
+                <TextField value={rdetails.jobTitle} onChange={e=>setrdetails({...rdetails,jobTitle:e.target.value})} id="standard-basic-Job" label="Job Title" variant="standard" />
+                <TextField value={rdetails.location} onChange={e=>setrdetails({...rdetails,location:e.target.value})} id="standard-basic-name-location" label="Location" variant="standard" />
 
             </div>
         </div>
@@ -77,11 +100,11 @@ function UserInput() {
         <div>
             <h3>Contacts</h3>
             <div className='d-flex row p-3'>
-                <TextField id="standard-basic-email" label="Email" variant="standard" />
-                <TextField id="standard-basic-Phone" label="Phone Number" variant="standard" />
-                <TextField id="standard-basic-name-Github" label="Github Link" variant="standard" />
-                <TextField id="standard-basic-Profile-Link" label="Profile Link" variant="standard" />
-                <TextField id="standard-basic-name-Portfolio-Link" label="Portfolio Link" variant="standard" />
+                <TextField value={rdetails.email} onChange={e=>setrdetails({...rdetails,email:e.target.value})} id="standard-basic-email" label="Email" variant="standard" />
+                <TextField value={rdetails.mobile} onChange={e=>setrdetails({...rdetails,mobile:e.target.value})} id="standard-basic-Phone" label="Phone Number" variant="standard" />
+                <TextField value={rdetails.github} onChange={e=>setrdetails({...rdetails,github:e.target.value})} id="standard-basic-name-Github" label="Github Link" variant="standard" />
+                <TextField value={rdetails.linkedin} onChange={e=>setrdetails({...rdetails,linkedin:e.target.value})} id="standard-basic-Profile-Link" label="Profile Link" variant="standard" />
+                <TextField value={rdetails.portfolio} onChange={e=>setrdetails({...rdetails,portfolio:e.target.value})} id="standard-basic-name-Portfolio-Link" label="Portfolio Link" variant="standard" />
 
             </div>
 
@@ -95,10 +118,10 @@ function UserInput() {
             <h3>Education</h3>
             
             <div className='d-flex row p-3'>
-                <TextField id="standard-basic-Course" label="Course Name" variant="standard" />
-                <TextField id="standard-basic-College" label="College Name" variant="standard" />
-                <TextField id="standard-basic-name-University" label="University" variant="standard" />
-                <TextField id="standard-basic-Passout" label="Year of Passout" variant="standard" />
+                <TextField value={rdetails.course} onChange={e=>setrdetails({...rdetails,course:e.target.value})} id="standard-basic-Course" label="Course Name" variant="standard" />
+                <TextField value={rdetails.college} onChange={e=>setrdetails({...rdetails,college:e.target.value})} id="standard-basic-College" label="College Name" variant="standard" />
+                <TextField value={rdetails.university} onChange={e=>setrdetails({...rdetails,university:e.target.value})} id="standard-basic-name-University" label="University" variant="standard" />
+                <TextField value={rdetails.passoutYear} onChange={e=>setrdetails({...rdetails,passoutYear:e.target.value})} id="standard-basic-Passout" label="Year of Passout" variant="standard" />
 
             </div>
         </div>
@@ -110,10 +133,10 @@ function UserInput() {
             
             
             <div className='d-flex row p-3'>
-                <TextField id="standard-basic-Internship" label="Job or Internship" variant="standard" />
-                <TextField id="standard-basic-Company" label="Company Name" variant="standard" />
-                <TextField id="standard-basic-name-Company-location" label="Company Location" variant="standard" />
-                <TextField id="standard-basic-Duration" label="Duration" variant="standard" />
+                <TextField value={rdetails.jobType} onChange={e=>setrdetails({...rdetails,jobType:e.target.value})} id="standard-basic-Internship" label="Job or Internship" variant="standard" />
+                <TextField value={rdetails.company} onChange={e=>setrdetails({...rdetails,company:e.target.value})} id="standard-basic-Company" label="Company Name" variant="standard" />
+                <TextField value={rdetails.cLoaction} onChange={e=>setrdetails({...rdetails,cLoaction:e.target.value})} id="standard-basic-name-Company-location" label="Company Location" variant="standard" />
+                <TextField value={rdetails.duration} onChange={e=>setrdetails({...rdetails,duration:e.target.value})} id="standard-basic-Duration" label="Duration" variant="standard" />
 
             </div>
         </div>
@@ -151,7 +174,7 @@ function UserInput() {
         <div>
             <h3>Summary</h3>
             <div className='p-3 row'>
-                <TextField id="standard-basic-summary" label="Write a short summary of yourself" variant="standard"  multiline rows={7} defaultValue={'Highly motivated and detail-oriented MERN Stack Developer with strong proficiency in building full-stack web applications using MongoDB, Express.js, React, and Node.js. Experienced in developing responsive user interfaces with React and Material-UI, implementing RESTful APIs, and managing databases with MongoDB. Passionate about creating efficient, scalable, and user-friendly web applications with clean, maintainable code. Skilled in modern development practices including version control with Git, agile methodologies, and test-driven development. Committed to staying current with emerging technologies and best practices in web development to deliver innovative solutions.'}/>
+                <TextField  onChange={e=>setrdetails({...rdetails,summary:e.target.value})} id="standard-basic-summary" label="Write a short summary of yourself" variant="standard"  multiline rows={7} defaultValue={'Highly motivated and detail-oriented MERN Stack Developer with strong proficiency in building full-stack web applications using MongoDB, Express.js, React, and Node.js. Experienced in developing responsive user interfaces with React and Material-UI, implementing RESTful APIs, and managing databases with MongoDB. Passionate about creating efficient, scalable, and user-friendly web applications with clean, maintainable code. Skilled in modern development practices including version control with Git, agile methodologies, and test-driven development. Committed to staying current with emerging technologies and best practices in web development to deliver innovative solutions.'}/>
   
             </div>
         </div>
