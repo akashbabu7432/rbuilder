@@ -8,6 +8,7 @@ import History from './pages/History'
 import Pnf from './pages/Pnf'
 import Header from './component/Header'
 import Footer from './component/Footer'
+import Viewresume from './pages/Viewresume'
 function App() {
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/resume" element={<ResumeGen />} />
         <Route path="/userform" element={<Userform />} />
         <Route path="/history" element={<History />} />
+        <Route path='/resume/:id/view' element={<Viewresume />} />
         <Route path="/*" element={<Pnf />} />
       </Routes>
     <Footer/>

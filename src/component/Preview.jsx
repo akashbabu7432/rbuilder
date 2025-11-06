@@ -1,45 +1,47 @@
 import { Divider,Button } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { FaXmark } from "react-icons/fa6";
 
 
-function Preview() {
+function Preview({rdetails}) {
+  
   return (
     <div style={{margin:'80px'}} className='shadow p-5 w-100 rounded text-center'>
-      <h3>Name</h3>
-      <h4>Job Title</h4>
-      <p><span className='m-2'>Location</span>|<span className='m-2'>E-Mail</span>|<span className='m-2'>Mobile</span></p>
+      <h3>{rdetails?.username}</h3>
+      <h4>{rdetails?.jobTitle}</h4>
+      <p><span className='m-2'>{rdetails?.location}</span>|<span className='m-2'>{rdetails?.email}</span>|<span className='m-2'>{rdetails?.mobile}</span></p>
       <p>
-        <a href="" className='m-2' target='_blank'>GITHUB</a>|
-        <a href="" className='m-2' target='_blank'>LINKEDIN</a>|
-        <a href="" className='m-2' target='_blank'>TWITTER</a>
+        <a href={rdetails?.github} className='m-2' target='_blank'>GITHUB</a>|
+        <a href={rdetails?.linkedin} className='m-2' target='_blank'>LINKEDIN</a>|
+        <a href={rdetails?.portfolio} className='m-2' target='_blank'>TWITTER</a>
       </p>
        <Divider sx={{fontSize:'25px'}}>SUMMARY</Divider>
-       <p style={{textAlign:'justify'}}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda voluptatibus, eius molestiae unde iusto ducimus libero dolore minima quia qui? Maiores odio tempora id temporibus voluptatum exercitationem pariatur. Explicabo, perspiciatis.
-       Non eius commodi consequatur alias? Natus nobis iure eos dolores et deserunt eligendi nihil possimus officiis asperiores, obcaecati a autem cum odit consequuntur fugit dignissimos facere. Blanditiis porro sapiente error.
-       Labore minima quibusdam dolorum neque mollitia cum autem, placeat, fuga vitae id tenetur optio quas porro illum voluptatibus, saepe nemo quos eius voluptate fugiat officia molestias hic. Impedit, sunt eligendi!
-       Laboriosam aperiam fugiat molestiae, em tempora eos commodi? In eveniet iste dicta doloribus iure numquam odit non animi neque ex, molestias earum totam consectetur sit amet sint?</p>
+       <p style={{textAlign:'justify'}}>{rdetails?.summary}</p>
        
        
        <Divider sx={{fontSize:'25px'}}>EDUCATION</Divider>
-      <h4>Course name</h4>
+      <h4>{rdetails?.course} </h4>
       <p>
-        <span className='m-2'>College</span>
-        |<span className='m-2'>University</span>
-        |<span className='m-2'>year of passout</span>
+        <span className='m-2'>{rdetails?.college} </span>
+        |<span className='m-2'>{rdetails?.university} </span>
+        |<span className='m-2'>{rdetails?.passoutYear} </span>
       </p>
 
        <Divider sx={{fontSize:'25px'}}>Proffessional Experience</Divider>
-      <h4>Job / Internship</h4>
+      <h4>{rdetails?.jobType}</h4>
       <p>
-        <span className='m-2'>Company name</span>
-        |<span className='m-2'>Company Location</span>
-        |<span className='m-2'>Duration</span>
+        <span className='m-2'>{rdetails?.company}</span>
+        |<span className='m-2'>{rdetails?.cLoaction}</span>
+        |<span className='m-2'>{rdetails?.duration}</span>
       </p>
 
       <Divider sx={{fontSize:'25px ' ,marginBottom:'10px'}}>Skills</Divider>
       <div className="d-flex flex-wrap justify-content-between p-3 ">
-        <Button variant="contained">node js<FaXmark className='mx-2 cursor-pointer'/></Button>
+        {
+          rdetails?.userSkills?.map((item)=>(
+          <Button key={item}  variant='contained' className='m-1'>{item}</Button>
+          ))
+        }
       </div>
       
 

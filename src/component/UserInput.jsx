@@ -8,36 +8,23 @@ import Typography from '@mui/material/Typography';
 
 import TextField from '@mui/material/TextField';
 import { FaXmark } from "react-icons/fa6";
+import { addresumeapi } from '../services/allapi';
+import { useNavigate } from 'react-router-dom';
+
 
 const steps = ['Basic', 'Contacts', 'Education','Experience','Skills & certification','Review'];
 
-function UserInput() {
+function UserInput({rdetails,setrdetails}) {
   const arryskill=['node js','react js' ,'flutter', 'java','python','c++'];
- const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
-  const [rdetails,setrdetails]=React.useState({
-    username:"",
-    jobTitle:"",
-    location:"",
-    email:"",
-    mobile:"",
-    github:"",
-    linkedin:"",
-    portfolio:"",
-    course:"",
-    college:"",
-    university:"",
-    passoutYear:"",
-    jobType:"",
-    company :"",
-    cLoaction:"",
-    duration:"",
-    userSkills: [],
-    summary:"",
+  // console.log(rdetails)
 
-  })
-  console.log(rdetails)
+  const skillRef = React.useRef()
+
+  const navigate= useNavigate()
+  
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -80,6 +67,23 @@ function UserInput() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const addskills =(skill)=>{
+    if(rdetails.userSkills.includes(skill)){
+
+      alert("skill already added")
+    }else{
+      setrdetails({...rdetails,userSkills:[...rdetails.userSkills,skill]})
+      skillRef.current.value = ""
+
+    }
+
+  }
+
+  const removeSkill =(skill)=>{
+    setrdetails({...rdetails,userSkills:rdetails.userSkills.filter(item=>item!==skill)})
+
+  }
 
 
   const renderSteps=(stepCount)=>{
@@ -145,15 +149,15 @@ function UserInput() {
         <div>
             <h3>Skills</h3>
             <div className='d-flex align-items-center justify-content-between  p-3'>
-              <input type="text" className='form-controll' placeholder='add skill' />
-                <Button variant="text">Add</Button>
+              <input ref={skillRef} type="text" className='form-controll' placeholder='add skill' />
+                <Button onClick={()=>addskills(skillRef.current.value)} variant="text">Add</Button>
             </div>
           
             <h4>Suggestions</h4>
             <div className="d-flex flex-wrap justify-content-between p-3 ">
               {
                 arryskill.map((item,index)=>(
-                   <Button key={index} variant="outlined" className='m-2'>{item}</Button>
+                   <Button onClick={()=>addskills(item)} key={index} variant="outlined" className='m-2'>{item}</Button>
                 ))
                  
                 
@@ -161,8 +165,15 @@ function UserInput() {
             </div>
             <h4>Added Skills</h4>
             <div className="d-flex flex-wrap justify-content-between p-3 ">
-              <Button variant="contained">node js<FaXmark className='mx-2 cursor-pointer'/></Button>
+              {
+                rdetails.userSkills?.length>0?
+                 rdetails.userSkills.map((item,index)=>(
+                  <Button  key={index} variant="contained">{item}<FaXmark onClick={()=>removeSkill(item)} className='mx-2 cursor-pointer'/></Button>
               
+                ))
+                :
+                <p>no skill are added yet</p>
+              }
             </div>
 
               
@@ -183,6 +194,30 @@ function UserInput() {
     }
       
 
+  }
+
+  const handleAddResume=async()=>{ 
+    const {username,jobTitle,location}=rdetails
+    if(!username && !jobTitle && !location){
+      alert('Please fill all the fields')
+    }else{
+      console.log("Api call");
+      try{
+        const result=await addresumeapi(rdetails)
+        console.log(result);
+        if(result.status===201){
+          alert("Resume added successfully")
+          const {id}=result.data
+          setTimeout(() => {
+            navigate(`/resume/${id}/view`)
+})
+        }
+
+      }catch(error){
+        console.log(error)
+
+      }
+    }
   }
 
 
@@ -239,9 +274,10 @@ function UserInput() {
                 Skip
               </Button>
             )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+            {activeStep === steps.length - 1 ? <Button onClick={handleAddResume}>Finish</Button> : <Button onClick={handleNext}>Next</Button>}
+            
+                        
+
           </Box>
         </React.Fragment>
       )}
