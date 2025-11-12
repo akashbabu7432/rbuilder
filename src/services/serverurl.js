@@ -1,3 +1,3 @@
-const serverurl ="http://localhost:3000"
+const serverurl ="https://resumebuilderseerver.onrender.com"
 
 export default serverurl
