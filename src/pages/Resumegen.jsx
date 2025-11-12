@@ -3,7 +3,7 @@ import { CiFileOn } from "react-icons/ci";
 import { FaFileDownload } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
-function Resumegen() {
+function ResumeGen() {
   return (
     <div>
       <h3 className='text-center'>Create a Job Winning Resume In Minutes</h3>
@@ -45,4 +45,4 @@ function Resumegen() {
   )
 }
 
-export default Resumegen
+export default ResumeGen
