@@ -1,3 +1,3 @@
-const serverurl ="https://resumebuilderseerver.onrender.com"
+const serverurl ="https://resumebuilderseerver-2.onrender.com"
 
 export default serverurl
