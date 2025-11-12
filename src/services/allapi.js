@@ -14,5 +14,16 @@ export const updateresumeapi=async(id,resume)=>{
      return await commonapi(`${serverurl}/resume/${id}`,"PUT",resume)
 }
 // add history api
+export const addhistoryapi=async(history)=>{
+     return await commonapi(`${serverurl}/history`,"POST",history)
+}
+
+
 // get history api
+export const gethistoryapi=async()=>{
+     return await commonapi(`${serverurl}/history`,"GET",{})
+}
 // remove hispory api
+export const removehistoryapi=async(id)=>{
+     return await commonapi(`${serverurl}/history/${id}`,"DELETE",{})
+}

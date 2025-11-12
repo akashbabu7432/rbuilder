@@ -7,7 +7,7 @@ import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { FaXmark } from "react-icons/fa6";
-
+import { updateresumeapi } from '../services/allapi';
 
 const style = {
   position: 'absolute',
@@ -45,6 +45,25 @@ function Edit({rdetails,setrdetails}) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleresumeupdate=async()=>{
+      const {id ,username ,jobTitle,location}=rdetails
+      if(!id && !username && !jobTitle && !location){
+        alert("Please fill all the fields")
+      }else{
+        console.log('Api call');
+        try{
+          const result= await updateresumeapi(id,rdetails)
+          console.log(result);
+          if (result.status===200){
+            alert("Resume Updated Successfully")
+            handleClose()
+          }
+
+        }catch(err){
+          console.log(err);
+        }
+      }
+    }
   return (
     <div>
         <button className="btn fs-4 " onClick={handleOpen}> <FaRegEdit/></button>
@@ -142,7 +161,7 @@ function Edit({rdetails,setrdetails}) {
             </div>
             {/* 7 */}
             <div className='text-center'>
-                <Button className='btn btn-warning'>Update</Button>
+                <Button onClick={handleresumeupdate} className='btn btn-warning'>Update</Button>
             </div>
             
           </Box>
