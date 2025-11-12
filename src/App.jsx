@@ -2,7 +2,7 @@
 import { Route ,Routes} from 'react-router-dom'
 import './App.css'
 import Landing from './pages/Landing'
-import ResumeGen  from './pages/ResumeGen'
+import ResumeGen  from './pages/Resumegen'
 import Userform from './pages/Userform'
 import History from './pages/History'
 import Pnf from './pages/Pnf'
